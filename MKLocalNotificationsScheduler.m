@@ -20,12 +20,18 @@ static MKLocalNotificationsScheduler *_instance;
 		
         if (_instance == nil) {
 			
-            _instance = [[self alloc] init];
-            
-            // Allocate/initialize any member variables of the singleton class here
-            // example
-			//_instance.member = @"";
-			_instance.badgeCount = 0;
+			// iOS 4 compatibility check
+			Class notificationClass = NSClassFromString(@"UILocalNotification");
+			
+			if(notificationClass == nil)
+			{
+				_instance = nil;
+			}
+			else 
+			{				
+				_instance = [[super allocWithZone:NULL] init];				
+				_instance.badgeCount = 0;
+			}
         }
     }
     return _instance;
@@ -35,18 +41,8 @@ static MKLocalNotificationsScheduler *_instance;
 #pragma mark Singleton Methods
 
 + (id)allocWithZone:(NSZone *)zone
-
 {	
-    @synchronized(self) {
-		
-        if (_instance == nil) {
-			
-            _instance = [super allocWithZone:zone];			
-            return _instance;  // assignment and return on first allocation
-        }
-    }
-	
-    return nil; //on subsequent allocation attempts return nil	
+   return [[self sharedInstance] retain];
 }
 
 
@@ -62,7 +58,7 @@ static MKLocalNotificationsScheduler *_instance;
 
 - (unsigned)retainCount
 {
-    return UINT_MAX;  //denotes an object that cannot be released
+    return NSUIntegerMax;  //denotes an object that cannot be released
 }
 
 - (void)release
