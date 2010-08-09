@@ -26,6 +26,12 @@
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 
+    UILocalNotification *localNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+	
+    if (localNotification) 
+	{
+		[[MKLocalNotificationsScheduler sharedInstance] handleReceivedNotification:localNotification];
+    }
     return YES;
 }
 
@@ -77,6 +83,10 @@
      */
 }
 
+- (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)localNotification {
+
+	[[MKLocalNotificationsScheduler sharedInstance] handleReceivedNotification:localNotification];
+}
 
 - (void)dealloc {
     [viewController release];

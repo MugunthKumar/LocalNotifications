@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MKLocalNotificationsScheduler.h"
 
 @interface LocalNotifsViewController : UIViewController {
 

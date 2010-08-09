@@ -29,12 +29,19 @@
 */
 
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+	
+	[[MKLocalNotificationsScheduler sharedInstance] scheduleNotificationOn:[NSDate dateWithTimeIntervalSinceNow:20] 
+																	  text:@"Hey there" 
+																	action:@"View" 
+																	 sound:nil 
+															   launchImage:nil 
+																   andInfo:nil];
     [super viewDidLoad];
 }
-*/
+
 
 
 /*
