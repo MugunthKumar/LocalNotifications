@@ -117,7 +117,7 @@ static MKLocalNotificationsScheduler *_instance;
 - (void) decreaseBadgeCountBy:(int) count
 {
 	self.badgeCount -= count;
-	if(self.badgeCount < 0) self.badgeCount == 0;
+	if(self.badgeCount < 0) self.badgeCount = 0;
 	
 	[UIApplication sharedApplication].applicationIconBadgeNumber = self.badgeCount;
 }
